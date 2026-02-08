@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mythologie Grecque - Le Panthéon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #DAA520;
+            --deep-red: #660000;
+            --marble: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            color: white;
+            background-image: url('olympe_background.jpg');
+            background-color: var(--deep-red);
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: background 0.5s ease;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        nav button {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--gold);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+        }
+
+        nav button:hover { background: var(--gold); color: black; }
+
+        .nav-profile {
+            color: var(--gold) !important;
+            font-weight: bold;
+            border: 2px solid var(--gold) !important;
+            margin-left: 10px;
+        }
+
+        section {
+            display: none;
+            padding: 120px 10%;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            border: 3px solid var(--gold);
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .auth-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+            margin: 0 auto;
+        }
+
+        .auth-title {
+            background: var(--gold);
+            color: black;
+            padding: 10px 25px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid var(--gold);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            box-sizing: border-box;
+            font-family: 'Cinzel', serif;
+        }
+
+        .login-btn {
+            background-color: var(--gold);
+            color: black;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .god-section .card {
+            background: var(--marble);
+            color: #1a1a1a;
+            text-align: left;
+        }
+
+        .card img {
+            width: 300px;
+            float: right;
+            margin-left: 25px;
+            border-radius: 10px;
+            border: 4px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .grid-menu button {
+            background: rgba(218, 165, 32, 0.1);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 15px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .grid-menu button:hover { background: var(--gold); color: black; transform: scale(1.05); }
+
+        h1 { font-size: 3.5em; color: var(--gold); text-shadow: 2px 2px 5px black; }
+        h2 { color: var(--deep-red); font-size: 2.5em; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
+        p { font-size: 1.15em; line-height: 1.8; text-align: justify; }
+
+        #welcome-msg { color: var(--gold); font-size: 1.8em; margin-bottom: 20px; text-align: center; }
+
+        .btn-action {
+            padding: 15px 35px;
+            border: 2px solid var(--gold);
+            background: linear-gradient(90deg, #8B0000, #4a0000);
+            color: white;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+        }
+
+        footer { text-align: center; padding: 20px; background: black; color: gray; }
+        .clearfix::after { content: ""; clear: both; display: table; }
+
+        .member-card { transition: 0.3s; margin-bottom: 30px !important; }
+        .member-card:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--gold) !important; }
+        .contact-title { color: var(--gold); font-weight: bold; display: block; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop><source src="musique.mp3" type="audio/mpeg"></audio>
+
+<nav id="main-nav">
+    <button onclick="showPage('hub')">Accueil</button>
+    <button onclick="showPage('menu-dieux')">Dieux</button>
+    <button onclick="showPage('menu-titans')">Titans</button>
+    <button onclick="showPage('menu-chronologie')">Chronologie</button>
+    <button onclick="showPage('menu-lieux')">Lieux</button>
+    <button onclick="showPage('menu-monstres')">Monstres</button>
+    <button onclick="showPage('menu-heros')">Héros</button>
+    <button onclick="showPage('page-equipe')">Équipe</button>
+    <button id="auth-status" class="nav-profile" onclick="handleAuthAction()">👤 S'inscrire</button>
+</nav>
+
+
+    <section id="accueil" style="display: flex; align-items: center;">
+        <div class="card">
+            <h1>L'Épopée de l'Olympe</h1>
+            <p>Bienvenue dans l'archive sacrée des légendes antiques. Explorez les récits des immortels et des créatures de l'âge d'or.</p>
+            <button class="btn-action" onclick="showPage('connexion')">Ouvrir le Grimoire</button>
+        </div>
+    </section>
+
+    <section id="connexion" style="display:flex; align-items:center; justify-content:center;">
+        <div class="auth-container">
+            <div class="auth-title">CONNEXION</div>
+            <input type="email" id="email_login" class="auth-input" placeholder="Email">
+            <input type="password" id="pass_login" class="auth-input" placeholder="Mot de passe">
+            <button type="button" class="login-btn" onclick="unlockSite('login')">Se connecter</button>
+            <p style="margin-top:15px; font-size:0.9em;">Nouveau ici ? <span style="color:var(--gold); cursor:pointer; font-weight:bold;" onclick="showPage('inscription')">Créer un compte</span></p>
+        </div>
+    </section>
+
+    <section id="inscription" style="display:flex; align-items:center; justify-content:center;">
+        <div class="auth-container">
+            <div class="auth-title">INSCRIPTION</div>
+            <input type="text" id="username" class="auth-input" placeholder="nom">
+            <input type="text" id="username" class="auth-input" placeholder="Prénom">
+            <input type="email" id="email_reg" class="auth-input" placeholder="Email">
+            <input type="password" id="pass_reg" class="auth-input" placeholder="Mot de passe">
+            <button type="button" class="login-btn" onclick="unlockSite('reg')">S’inscrire</button>
+            <p style="margin-top:15px; font-size:0.9em;">Déjà un compte ? <span style="color:var(--gold); cursor:pointer; font-weight:bold;" onclick="showPage('connexion')">Se connecter</span></p>
+        </div>
+    </section>
+
+    <section id="hub">
+        <div class="card">
+            <button onclick="toggleMusic()" id="musicBtn" style="background: var(--gold); border: none; padding: 10px 20px; cursor: pointer; font-family: 'Cinzel'; margin-bottom: 20px;">LANCER LA MUSIQUE</button>
+            
+            <h2 id="welcome-msg"></h2>
+
+            <div style="margin-bottom: 30px;">
+                <form action="https://www.google.com/search" method="get" target="_blank" style="display: flex; justify-content: center; gap: 5px;">
+                    <input type="text" name="q" placeholder="Rechercher sur Google..." style="padding: 10px; border: 1px solid var(--gold); background: rgba(255,255,255,0.1); color: white; font-family: 'Cinzel'; width: 250px; border-radius: 5px;">
+                    <button type="submit" style="background: var(--gold); border: none; padding: 10px 20px; cursor: pointer; font-family: 'Cinzel'; font-weight: bold; border-radius: 5px;">Rechercher</button>
+                </form>
+            </div>
+
+            <h1>Panthéon Général</h1>
+            <div class="grid-menu">
+                <button onclick="showPage('menu-dieux')">🔱 Les Dieux</button>
+                <button onclick="showPage('menu-titans')">🪐 Les Titans</button>
+                <button onclick="showPage('menu-chronologie')">⏳ Chronologie</button>
+                <button onclick="showPage('menu-lieux')">🏛️ Les Lieux</button>
+                <button onclick="showPage('menu-monstres')">🐍 Les Monstres</button>
+                <button onclick="showPage('menu-heros')">🛡️ Les Héros</button>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <div style="border-top: 2px solid var(--gold); width: 80%; margin: 0 auto 15px auto;"></div>
+                <h3 style="color: var(--gold); letter-spacing: 3px;">SUPPORT</h3>
+                <div style="display: flex; justify-content: center; margin-top: 15px;">
+                    <button onclick="showPage('page-equipe')" style="background: rgba(218, 165, 32, 0.1); color: var(--gold); border: 2px solid var(--gold); padding: 15px 40px; cursor: pointer; font-family: 'Cinzel'; font-weight: bold; transition: 0.3s;">👥 L'Équipe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu-chronologie" class="god-section">
+        <div class="card">
+            <h1>Chronologie de l'Univers</h1>
+            <div class="clearfix"><img src="chaos_origon.jpg" style="width:200px; float:left; margin-right:20px;"><h3>I. Le Chaos Primordial</h3><p>Avant la naissance du temps et de la forme, il n'existait que le Chaos : une entité béante, un abîme insondable d'où tout a émergé par une force créatrice mystérieuse. De ce vide originel surgirent les fondations mêmes de l'existence : Gaïa, la Terre nourricière au sein généreux, et Éros, le désir primordial qui anime la vie. Ce fut l'époque de la création brute, une phase de genèse sauvage où le Ciel (Ouranos) fut engendré pour envelopper la Terre. Avant que les premiers Titans ne viennent structurer le cosmos et instaurer les lois de la nature, les montagnes s'élevèrent et les mers profondes furent creusées dans un tumulte d'énergie pure, posant les jalons d'un univers encore indompté.</p></div>
+            <div class="clearfix"><img src="titanomachie_war.jpg" style="width:200px; float:right; margin-left:20px;"><h3>II. La Titanomachie</h3><p>Cette guerre titanesque, d'une violence inouïe, dura dix longues années et marqua la fin de l'ancien monde. Elle opposa les anciens Titans, défenseurs du règne de Cronos, aux nouveaux dieux de l'Olympe menés par le jeune et ambitieux Zeus. Le fracas des combats fut tel qu'il ébranla les fondements mêmes de l'univers, mêlant les séismes aux tempêtes stellaires. Le tournant décisif survint lorsque Zeus libéra les Cyclopes et les Hécatonchires des profondeurs du Tartare. Grâce à la foudre forgée par les Cyclopes et à une stratégie implacable, Zeus finit par triompher de son père, précipitant les Titans déchus dans les abîmes et instaurant enfin l'ordre et la hiérarchie sur le mont Olympe. </p></div>
+            <div class="clearfix"><img src="partage_monde.jpg" style="width:200px; float:left; margin-right:20px;"><h3>III. Le Partage du Monde</h3><p>Après leur victoire éclatante sur les forces primordiales, la stabilité de l'univers reposait sur un équilibre fragile. Pour éviter de nouvelles discordes, les trois frères — Zeus, Poséidon et Hadès — décidèrent de tirer au sort la souveraineté des royaumes du monde connu. Zeus, le grand ordonnateur, devint le maître du Ciel et le souverain suprême des dieux et des hommes. Poséidon, armé de son trident, obtint la souveraineté absolue sur les Mers et les océans, commandant aux tempêtes et aux créatures des abysses. Hadès, le plus sombre de la fratrie, reçut le domaine des Morts, régnant sur le monde souterrain où les ombres des défunts séjournent.</p></div>
+            <div class="clearfix"><img src="age_heros.jpg" style="width:200px; float:right; margin-left:20px;"><h3>IV. L'âge des héros </h3><p>C'est l'époque mythique de la transition, une era de légende où les dieux quittèrent leurs palais célestes pour se mêler aux mortels. De ces unions interdites naquirent les demi-dieux, des êtres d'exception dotés d'une force surhumaine mais soumis à la finitude humaine. Ce fut le temps des grandes épopées qui définirent le courage et l'honneur pour les siècles à venir. On y conte les douze travaux d'Hercule, symbole de la rédemption par l'effort, ou encore la tragique et grandiose Guerre de Troie, où le destin des héros comme Achille ou Hector fut scellé par la volonté capricieuse des divinités. Cet âge d'or représente le sommet de l'interaction entre le divin et l'humain, avant que les dieux ne se retirent définitivement du monde des hommes.</p></div>
+            <button class="btn-action" onclick="showPage('hub')">Retour au HUB</button>
+        </div>
+    </section>
+
+    <section id="zeus" class="god-section"><div class="card clearfix"><img src="zeus.jpg"><h2>Zeus - Roi des Dieux</h2><p>Souverain suprême du mont Olympe, Zeus est le dieu du ciel, de la foudre et du tonnerre. Fils des Titans Cronos et Rhéa, il a mené ses frères et sœurs à la victoire contre leur père pour établir un nouvel ordre universel. Armé de sa foudre forgée par les Cyclopes, il maintient la justice et l'équilibre entre les mortels et les immortels. Son symbole principal est l'aigle, qui surveille le monde d'en haut. Bien qu'il soit le garant des lois, Zeus est célèbre pour ses nombreuses aventures qui ont donné naissance à des héros légendaires, assurant la pérennité de la lignée divine sur terre.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="hera" class="god-section"><div class="card clearfix"><img src="hera.jpg"><h2>Héra - Reine de l'Olympe</h2><p>Déesse protectrice du mariage, des femmes et de la famille, Héra est l'épouse et la sœur de Zeus. Elle occupe une place centrale dans la hiérarchie olympienne, incarnant la dignité royale et la vigilance. Son animal sacré est le paon, dont les plumes évoquent les cent yeux de sa surveillance constante. Connue pour son caractère fier et ses colères redoutables envers les infidélités de son époux, elle reste néanmoins la gardienne sacrée de l'union conjugale. Elle est invoquée lors des mariages pour assurer la prospérité du foyer et la fidélité des époux à travers les siècles.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="poseidon" class="god-section"><div class="card clearfix"><img src="poseidon.jpg"><h2>Poséidon - Maître des Océans</h2><p>Dieu des océans, des tempêtes et des tremblements de terre, Poséidon règne sur les profondeurs depuis son palais sous-marin. Armé de son trident légendaire, il peut d'un seul geste soulever des vagues gigantesques ou apaiser les flots les plus furieux. Son tempérament est aussi changeant que la mer : calme et généreux un instant, destructeur et vengeur le suivant. Créateur des chevaux, il est souvent représenté dans un char tiré par des créatures marines. Ses colères sont craintes des marins, car il peut briser des navires et engloutir des îles s'il se sent offensé par l'arrogance humaine.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="athena" class="god-section"><div class="card clearfix"><img src="athena.jpg"><h2>Athéna - Sagesse et Stratégie</h2><p>Née entièrement armée du crâne de Zeus, Athéna est la déesse de la sagesse, de la stratégie militaire et des arts. Contrairement à Arès, elle privilégie l'intelligence et la ruse au combat brutal. Protectrice de la ville d'Athènes qu'elle a gagnée en offrant l'olivier, elle accompagne les héros dans leurs quêtes grâce à ses conseils avisés. Son animal fétiche est la chouette, symbole de clairvoyance nocturne. Elle incarne l'alliance parfaite entre la force physique et la supériorité mentale, faisant d'elle l'une des divinités les plus respectées et les plus puissantes du Panthéon grec.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="ares" class="god-section"><div class="card clearfix"><img src="ares.jpg"><h2>Arès - Dieu du Carnage</h2><p>Arès est le dieu de la guerre brutale, de la violence et du chaos sur le champ de bataille. Fils de Zeus et d'Héra, il est souvent détesté par les autres dieux pour sa soif de sang et son caractère impulsif. Accompagné de la Terreur et de la Peur, il parcourt les conflits humains en semant la destruction. Contrairement à Athéna, il incarne l'instinct de survie pur et la fureur aveugle du combat. Vêtu d'une armure de bronze étincelante, il représente l'aspect destructeur et inévitable de la nature humaine lors des guerres, rappelant que la paix est fragile et souvent conquise dans la douleur.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="apollon" class="god-section"><div class="card clearfix"><img src="apollon.jpg"><h2>Apollon - Dieu de la Lumière</h2><p>Dieu de la musique, de la prophétie, de la guérison et de la lumière solaire, Apollon est le maître des Muses. Il joue de la lyre avec une perfection qui enchante tout l'Olympe. Célèbre pour son temple à Delphes où il rendait ses oracles, il guidait les hommes vers leur destin. Il est également un archer redoutable, capable d'apporter la peste comme la guérison. Représenté comme un jeune homme d'une beauté parfaite, il incarne l'harmonie, l'ordre et la clarté de l'esprit. Protecteur des arts et de la jeunesse, il apporte la civilisation et l'inspiration au monde à travers la beauté et le savoir.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="artemis" class="god-section"><div class="card clearfix"><img src="artemis.jpg"><h2>Artémis - Chasseresse de la Lune</h2><p>Sœur jumelle d'Apollon, Artémis est la déesse de la chasse, de la lune et de la nature sauvage. Elle parcourt les forêts avec son arc d'argent et ses nymphes fidèles, veillant sur la pureté des sources et la vie des animaux. Farouche protectrice de son indépendance, elle a juré de ne jamais se marier. La biche est son animal sacré, symbole de grâce et de rapidité. Bien que protectrice, elle peut être impitoyable envers ceux qui profanent ses forêts ou insultent sa dignité. Elle incarne la force de la nature sauvage et la liberté absolue, courant sous la lumière argentée de la lune éternelle.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="hermes" class="god-section"><div class="card clearfix"><img src="hermes.jpg"><h2>Hermès - Le Messager Divin</h2><p>Reconnaissable à ses sandales ailées, Hermès est le messager des dieux et le protecteur des voyageurs, des commerçants et des voleurs. Plus rapide que l'éclair, il est doté d'une ruse incomparable et d'une éloquence qui lui permet de se sortir de toutes les situations. Il porte le Caducée, symbole de paix et de commerce. En tant que Psychopompe, il a pour mission de guider les âmes des morts vers le royaume d'Hadès. Toujours en mouvement, il incarne la communication et l'échange. Sa nature espiègle fait de lui un dieu apprécié, liant le monde des hommes à celui des immortels par ses voyages incessants.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="hades" class="god-section"><div class="card clearfix"><img src="hades.jpg"><h2>Hadès - Souverain des Enfers</h2><p>Frère de Zeus et de Poséidon, Hadès règne sur le monde souterrain où se rendent les âmes après la mort. Contrairement aux préjugés, il n'est pas un dieu maléfique, mais un juge sévère et inflexible qui veille au respect des lois de l'au-delà. Il possède un casque d'invisibilité qui lui permet de se déplacer sans être vu. Dieu des richesses souterraines comme l'or et les pierres précieuses, il vit dans un palais sombre avec son épouse Perséphone. Son fidèle gardien, le chien Cerbère, assure que personne ne quitte son royaume. Il impose le respect par son silence et son autorité absolue sur le destin final de chaque humain.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+    <section id="aphrodite" class="god-section"><div class="card clearfix"><img src="aphrodite.jpg"><h2>Aphrodite - Déesse de la Beauté</h2><p>Née de l'écume de mer, Aphrodite est la déesse de l'amour, de la beauté et du désir. Sa beauté est telle qu'elle provoque souvent des conflits, comme la célèbre guerre de Troie. Mariée au forgeron Héphaïstos, elle incarne la force irrésistible de l'attraction. Elle possède une ceinture magique qui rend quiconque la porte totalement irrésistible. Ses animaux sacrés sont la colombe et le cygne, symboles de paix et de grâce. Accompagnée de son fils Éros, elle parcourt le monde pour unir les cœurs ou semer le tourment amoureux, rappelant que l'amour est la force la plus puissante et la plus imprévisible de l'univers entier.</p><button class="btn-action" onclick="showPage('menu-dieux')">Retour</button></div></section>
+
+    <section id="cronos" class="god-section"><div class="card clearfix"><img src="cronos.jpg"><h2>Cronos - Souverain de l'Âge d'Or</h2><p>Cronos est le plus puissant des Titans de la première génération, fils d'Ouranos et de Gaïa. Après avoir détrôné son père, il régna sur un univers en paix durant ce qu'on appela l'Âge d'Or. Cependant, hanté par la peur d'être détrôné à son tour par sa progéniture, il commença à dévorer ses enfants dès leur naissance. Ce souverain implacable incarne le temps qui consume tout ce qu'il crée. Il fut finalement vaincu par son fils Zeus, marquant ainsi la fin de l'era des Titans et le début de la domination des Olympiens sur le monde.</p><button class="btn-action" onclick="showPage('menu-titans')">Retour</button></div></section>
+    <section id="rhea" class="god-section"><div class="card clearfix"><img src="rhea.jpg"><h2>Rhéa - La Mère de l'Olympe</h2><p>Épouse de Cronos et Titanide de la fertilité, Rhéa joua un rôle crucial dans le salut des dieux. Désespérée de voir ses enfants dévorés par Cronos, elle utilisa la ruse pour sauver son dernier-né, Zeus, en donnant à son mari une pierre emmaillotée à la place du nourrisson. Elle permit ainsi à la nouvelle génération de dieux de survivre, de grandir en secret et de renverser la tyrannie de l'ancien monde. Elle est souvent représentée comme une figure maternelle protectrice, incarnant la force de la nature et la persévérance de la lignée divine.</p><button class="btn-action" onclick="showPage('menu-titans')">Retour</button></div></section>
+    <section id="atlas" class="god-section"><div class="card clearfix"><img src="atlas.jpg"><h2>Atlas - Le Pilier du Ciel</h2><p>Condamné par Zeus après la défaite des Titans lors de la Titanomachie, Atlas reçut le châtiment le plus lourd : porter éternellement la voûte céleste sur ses épaules. Il est le symbole de l'endurance ultime et de la force physique inépuisable. Sa punition sert de pilier au monde, séparant physiquement la Terre du Ciel pour éviter qu'ils ne fusionnent à nouveau dans le chaos. Il incarne le poids des responsabilités cosmiques et la résilience face à un destin inévitable, restant figé à la frontière du monde connu par les mortels.</p><button class="btn-action" onclick="showPage('menu-titans')">Retour</button></div></section>
+    <section id="promethee" class="god-section"><div class="card clearfix"><img src="promethee.jpg"><h2>Prométhée - Bienfaiteur des Hommes</h2><p>Titan rebelle et protecteur de l'humanité, Prométhée est célèbre pour avoir façonné les premiers hommes avec de l'argile. Par amour pour ses créations, il défia l'autorité suprême de Zeus en volant le feu sacré de l'Olympe pour le donner aux mortels, leur offrant ainsi la lumière, la technologie et la civilisation. Pour ce crime, he fut enchaîné à un rocher où un aigle venait lui dévorer le foie chaque jour. Il représente le sacrifice ultime pour le progrès humain, la soif de connaissance et la rébellion intellectuelle face aux lois divines arbitraires.</p><button class="btn-action" onclick="showPage('menu-titans')">Retour</button></div></section>
+    <section id="oceanos" class="god-section"><div class="card clearfix"><img src="oceanos.jpg"><h2>Océanos - L'Origine des Eaux</h2><p>Aîné des Titans, il incarne le fleuve immense qui entoure le disque du monde. Contrairement à Poséidon qui règne sur la mer intérieure, Océanos est la source primordiale de toutes les rivières, sources et nuages. Ayant choisi la neutralité pendant la grande guerre, il resta le maître incontesté des eaux extérieures. Il symbolise l'origine de la vie, la fluidité éternelle de l'univers et la frontière mystérieuse qui sépare le monde connu du néant inconnu. Sa présence assure la circulation continue des forces vitales à travers toute la création.</p><button class="btn-action" onclick="showPage('menu-titans')">Retour</button></div></section>
+    <section id="hyperion" class="god-section"><div class="card clearfix"><img src="hyperion.jpg"><h2>Hypérion - La Lumière Primordiale</h2><p>Père du soleil, de la lune et de l'aurore, Hypérion est le Titan de la lumière céleste et de l'observation. Il est l'un des piliers qui maintiennent le ciel et fut le premier à comprendre les mouvements des astres. Il représente la clarté de l'esprit et la surveillance divine nécessaire à l'équilibre du cycle des jours et des nuits. Bien qu'il appartienne à l'ancienne génération, son héritage lumineux continue de briller à travers ses enfants, assurant que le monde ne retombe jamais dans l'obscurité totale du Chaos originel.</p><button class="btn-action" onclick="showPage('menu-titans')">Retour</button></div></section>
+
+    <section id="olympe" class="god-section"><div class="card clearfix"><img src="olympe.jpg"><h2>Le Mont Olympe</h2><p>Le mont Olympe est le sommet le plus haut de Grèce, mais dans la mythologie, il représente bien plus : c'est la demeure éternelle des douze dieux principaux. Caché derrière un mur de nuages gardé par les Heures, ce lieu sacré ne connaît jamais la pluie ni le froid. Les dieux y résident dans de magnifiques palais de marbre et d'or construits par Héphaïstos. Ils se réunissent dans la salle du trône de Zeus pour débattre du sort des mortels tout en dégustant l'ambroisie et le nectar, les substances divines qui leur confèrent leur immortalité et leur jeunesse éternelle.</p><button class="btn-action" onclick="showPage('menu-lieux')">Retour</button></div></section>
+    <section id="enfers" class="god-section"><div class="card clearfix"><img src="enfers.jpg"><h2>Le Royaume des Morts</h2><p>Les Enfers sont le territoire souterrain où les ombres des défunts séjournent pour l'éternité. Pour y entrer, les morts doivent traverser le fleuve Styx sur la barque de Charon. Une fois passée la porte gardée par Cerbère, les âmes sont jugées. Les justes accèdent aux Champs Élysées, un paradis verdoyant, tandis que les âmes ordinaires errent dans le Champ des Asphodèles. C'est un monde sombre et brumeux, régi par les lois strictes d'Hadès. Ce lieu rappelle aux mortels la fragilité de la vie et l'importance de mener une existence vertueuse avant le grand voyage final.</p><button class="btn-action" onclick="showPage('menu-lieux')">Retour</button></div></section>
+    <section id="atlantide" class="god-section"><div class="card clearfix"><img src="atlantide.jpg"><h2>L'Atlantide - Cité Perdue</h2><p>L'Atlantide était une puissance maritime immense située au-delà des Colonnes d'Hercule. Dédiée à Poséidon, l'île regorgeait de richesses inouïes et de technologies avancées. Cependant, ses habitants finirent par sombrer dans l'orgueil et l'ambition démesurée. Pour les punir de leur arrogance, Zeus déchaîna des séismes et des inondations catastrophiques. En un seul jour et une seule nuit, l'Atlantide disparut à jamais sous les flots, devenant le symbole universel d'une civilisation brillante détruite par sa propre démesure, laissant derrière elle un mystère qui fascine encore l'humanité.</p><button class="btn-action" onclick="showPage('menu-lieux')">Retour</button></div></section>
+    <section id="labyrinthe" class="god-section"><div class="card clearfix"><img src="labyrinthe.jpg"><h2>Le Labyrinthe de Crète</h2><p>Construit par le génial inventeur Dédale, le Labyrinthe est une structure d'une complexité absolue située sous le palais de Cnossos. Conçu pour enfermer le Minotaure, ses couloirs étaient si nombreux que même son créateur faillit s'y perdre. Chaque année, Athènes devait envoyer de jeunes sacrifiés pour nourrir le monstre. Le Labyrinthe est devenu le symbole des méandres de l'esprit humain et des épreuves insurmontables. Seul Thésée réussit à en sortir vivant grâce au fil d'Ariane, prouvant que la ruse et l'amour peuvent triompher des pièges les plus sombres de l'histoire.</p><button class="btn-action" onclick="showPage('menu-lieux')">Retour</button></div></section>
+    <section id="tartare" class="god-section"><div class="card clearfix"><img src="tartare.jpg"><h2>Le Tartare - Abîme Éternel</h2><p>Le Tartare est la région la plus profonde de l'univers, située bien au-dessous des Enfers. C'est une prison éternelle entourée d'un triple rempart de bronze où Zeus a enfermé les Titans après sa victoire. On y trouve aussi les grands criminels comme Sisyphe ou Tantale, condamnés à des châtiments éternels. C'est un lieu d'obscurité totale où le temps semble s'arrêter, destiné à punir ceux qui ont osé défier les dieux ou briser les lois sacrées. Il représente l'ultime frontière de l'ordre cosmique, là où les forces du chaos sont contenues pour assurer la sécurité de l'Olympe et du monde.</p><button class="btn-action" onclick="showPage('menu-lieux')">Retour</button></div></section>
+
+    <section id="cerbere" class="god-section"><div class="card clearfix"><img src="cerbere.jpg"><h2>Cerbère - Gardien des Enfers</h2><p>Cerbère est le chien monstrueux à trois têtes qui garde l'entrée du royaume d'Hadès. Sa mission est cruciale : il empêche les morts de s'échapper et interdit aux vivants d'entrer sans autorisation. Ses têtes représentent la vigilance absolue, car on raconte qu'elles ne dorment jamais toutes en même temps. Pour l'apaiser, les ombres lui offraient parfois un gâteau de miel. Seuls quelques héros comme Hercule ont réussi à le capturer, prouvant que même la plus féroce des bêtes peut être domptée par une force ou une volonté exceptionnelle. Il symbolise la barrière infranchissable entre la vie et la mort.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+    <section id="meduse" class="god-section"><div class="card clearfix"><img src="meduse.jpg"><h2>Méduse - La Gorgone Maudite</h2><p>Autrefois une magnifique jeune femme, Méduse fut transformée par Athéna en un monstre terrifiant avec des serpents pour cheveux. Son trait le plus redoutable est son regard : quiconque croise ses yeux est instantanément changé en pierre. Elle vivait isolée, entourée des statues de guerriers pétrifiés. Le héros Persée réussit à la décapiter en utilisant son bouclier comme un miroir pour éviter son regard mortel. Même morte, sa tête conserva son pouvoir pétrifiant, devenant un talisman protecteur sur l'Egide d'Athéna. Elle incarne la beauté devenue fatale et le danger caché sous une apparence monstrueuse.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+    <section id="minotaure" class="god-section"><div class="card clearfix"><img src="minotaure.jpg"><h2>Le Minotaure - Monstre du Labyrinthe</h2><p>Le Minotaure est une créature hybride possédant un corps d'homme puissant et une tête de taureau furieux. Né d'une union maudite, il fut enfermé par le roi Minos dans le Labyrinthe pour cacher cette honte. Ce monstre se nourrissait exclusivement de chair humaine, semant la terreur parmi les jeunes Athéniens envoyés en sacrifice. Sa mort sous les coups de Thésée marqua la fin d'un long règne de peur sur la mer Egée. Il représente l'animalité enfouie en l'homme et les monstres créés par les péchés des puissants, rappelant que la sauvagerie brute finit toujours par être vaincue par l'héroïsme.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+    <section id="hydre" class="god-section"><div class="card clearfix"><img src="hydre.jpg"><h2>L'Hydre de Lerne</h2><p>L'Hydre est un monstre aquatique aux multiples têtes de serpent. Ce qui la rendait invincible était sa capacité de régénération : chaque fois qu'une tête était tranchée, deux autres repoussaient à sa place. De plus, son sang et son haleine étaient mortellement toxiques. Hercule dut faire preuve d'ingéniosité en brûlant les cous tranchés pour empêcher les têtes de renaître. Une seule de ses têtes était immortelle, et le héros dut l'écraser sous un énorme rocher. L'Hydre symbolise les problèmes qui se multiplient si l'on ne s'attaque pas à leur racine avec méthode et persévérance.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+    <section id="sphinx" class="god-section"><div class="card clearfix"><img src="sphinx.jpg"><h2>Le Sphinx - La Créature des Énigmes</h2><p>Le Sphinx possède un buste de femme, un corps de lion et des ailes de rapace. Envoyée pour punir Thèbes, elle posait une énigme à chaque voyageur : ceux qui échouaient étaient dévorés. Son énigme célèbre sur les trois âges de l'homme fut finalement résolue par Oedipe. Vaincue par l'intelligence humaine, la bête se jeta du haut de son rocher. Contrairement aux autres monstres qui utilisent la force physique, le Sphinx représente le danger intellectuel et l'importance de la connaissance. Elle nous rappelle que l'esprit est souvent une arme plus puissante que l'épée face aux épreuves du destin.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+    <section id="chimere" class="god-section"><div class="card clearfix"><img src="chimere.jpg"><h2>La Chimère - Bête de Feu</h2><p>La Chimère est une créature effrayante composée d'un corps de lion, d'une tête de chèvre sur le dos et d'une queue de serpent. Capable de cracher des flammes ardentes, elle ravageait les campagnes de Lycie. Sa nature hybride en fait le symbole de l'absurde et de l'impossible. Elle fut terrassée par le héros Bellérophon, monté sur le cheval ailé Pégase. En volant au-dessus d'elle, il réussit à lancer une lance lestée de plomb dans sa gorge enflammée, étouffant le monstre de l'intérieur. Son nom est resté dans le langage courant pour désigner un rêve irréalisable ou une illusion trompeuse.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+    <section id="polypheme" class="god-section"><div class="card clearfix"><img src="polypheme.jpg"><h2>Polyphème - Le Cyclope Géant</h2><p>Polyphème est un géant sauvage possédant un seul oeil immense. Fils de Poséidon, il vivait en ermite, s'occupant de ses moutons dans une grotte massive. Dépourvu de manières et de respect pour l'hospitalité, il captura Ulysse et ses compagnons pour les dévorer. Le héros grec dut utiliser toute sa ruse pour s'échapper en l'enivrant et en lui crevant son oeil unique. Polyphème incarne la force brute dénuée d'intelligence. Sa défaite face à Ulysse illustre parfaitement la supériorité de la réflexion stratégique sur la violence sauvage, une leçon récurrente dans les récits de l'Antiquité.</p><button class="btn-action" onclick="showPage('menu-monstres')">Retour</button></div></section>
+
+    <section id="hercule" class="god-section"><div class="card clearfix"><img src="hercule.jpg"><h2>Hercule - La Force de l'Olympe</h2><p>Fils de Zeus et de la mortelle Alcmène, Hercule est le héros le plus célèbre de l'Antiquité. Doué d'une force surhumaine, il dut accomplir les Douze Travaux pour expier une faute terrible. De la capture du Cerbère au massacre de l'Hydre, il a prouvé sa bravoure face à l'impossible. Vêtu de la peau du lion de Némée, il est devenu le symbole de la persévérance humaine face aux épreuves divines. Après une vie de combats et de souffrances, il fut le seul mortel admis sur l'Olympe pour devenir un dieu, récompensé par son père pour ses actes héroïques qui ont protégé l'humanité entière.</p><button class="btn-action" onclick="showPage('menu-heros')">Retour</button></div></section>
+    <section id="achille" class="god-section"><div class="card clearfix"><img src="achille.jpg"><h2>Achille - Le Guerrier de Troie</h2><p>Achille est le plus grand guerrier de la guerre de Troie. Rendu presque invulnérable par sa mère qui le plongea dans le Styx, il n'avait qu'un seul point faible : son talon. Chef des Myrmidons, sa vitesse et sa fureur au combat étaient légendaires. Son histoire est celle d'un choix difficile entre une vie longue et paisible ou une vie courte couronnée d'une gloire éternelle. Il choisit la gloire et mourut à Troie, tué par une flèche guidée par Apollon. Il incarne l'héroïsme tragique et la quête d'immortalité à travers les exploits militaires, restant une figure incontournable de la littérature grecque.</p><button class="btn-action" onclick="showPage('menu-heros')">Retour</button></div></section>
+    <section id="persee" class="god-section"><div class="card clearfix"><img src="persee.jpg"><h2>Persée - Vainqueur de la Gorgone</h2><p>Persée est le fils de Zeus, célèbre pour avoir accompli l'exploit de trancher la tête de Méduse. Aidé par les dieux, he reçut des sandales ailées d'Hermès, un bouclier miroir d'Athéna et un casque d'invisibilité. Grâce à cet équipement divin, il triompha de la Gorgone et sauva plus tard la princesse Andromède d'un monstre marin géant. Contrairement à beaucoup d'autres héros grecs, Persée connut une fin de vie heureuse et paisible. Il est le fondateur de Mycènes et son image reste liée à l'audace, à l'intelligence technique et à la réussite d'une quête jugée impossible par tous les autres mortels.</p><button class="btn-action" onclick="showPage('menu-heros')">Retour</button></div></section>
+    <section id="thesee" class="god-section"><div class="card clearfix"><img src="thesee.jpg"><h2>Thésée - Le Roi Fondateur</h2><p>Thésée est le héros fondateur d'Athènes et le vainqueur du Minotaure. Fils caché du roi Égée, il accomplis de nombreux exploits sur la route pour rejoindre son père, débarrassant les chemins des brigands. Son acte le plus célèbre reste son voyage en Crète pour affronter le monstre du Labyrinthe. Aidé par le fil d'Ariane, il terrassa la bête et libéra son peuple du tribut de sang. Devenu roi, il unifia les villages de l'Attique pour créer une cité puissante. Thésée représente le passage de la force sauvage à la justice civile, bien que sa vie ait été marquée par des tragédies personnelles inoubliables.</p><button class="btn-action" onclick="showPage('menu-heros')">Retour</button></div></section>
+    <section id="ulysse" class="god-section"><div class="card clearfix"><img src="ulysse.jpg"><h2>Ulysse - Le Roi aux Mille Ruses</h2><p>Roi d'Ithaque et héros de l'Odyssée, Ulysse est célèbre pour son intelligence et sa persévérance. Après avoir conçu l'astuce du Cheval de Troie, il mit dix ans à retrouver son foyer. Son voyage fut une succession d'épreuves mythiques contre des cyclopes, des sirènes et des monstres marins. Protégé par Athéna, il est le symbole de l'homme capable de surmonter tous les obstacles par la ruse et la parole plutôt que par la force brute. Son retour triomphal à Ithaque auprès de son épouse Pénélope marque la victoire de la loyauté familiale et de la sagesse humaine sur l'adversité divine et les caprices du destin.</p><button class="btn-action" onclick="showPage('menu-heros')">Retour</button></div></section>
+
+    <section id="page-equipe" class="god-section">
+        <div class="card" style="background: rgba(0,0,0,0.7); border: none; margin-bottom: 30px; text-align: center;">
+            <h1 style="color: var(--gold);">L'Équipe du Projet</h1>
+        </div>
+        <div class="card clearfix member-card">
+            <img src="Photo1.jpg" alt="Jusse Lenz Sunshi-Cole">
+            <h2>Jusse Lenz Sunshi-Cole</h2>
+            <span class="contact-title">CONTACT</span>
+            <p>📧 Email : <a href="mailto:lenzjusse@mail.com" style="color: var(--gold); text-decoration: none;">lenzjusse@mail.com</a></p>
+            <p>📞 Numéro : +509 3558-8335</p>
+        </div>
+        <div class="card clearfix member-card">
+            <img src="Photo2.jpg" alt="Joseph Newensky">
+            <h2>Joseph Newensky</h2>
+            <span class="contact-title">CONTACT</span>
+            <p>📧 Email : <a href="mailto:josephcarlnewensky2@gmail.com" style="color: var(--gold); text-decoration: none;">josephcarlnewensky2@gmail.com</a></p>
+            <p>📞 Numéro : +509 3638-9282</p>
+        </div>
+        <div class="card clearfix member-card">
+            <img src="Photo3.jpg" alt="Jean Pierre Christ Allens">
+            <h2>Jean Pierre Christ Allens</h2>
+            <span class="contact-title">CONTACT</span>
+            <p>📧 Email : <a href="mailto:christallensj@gmail.com" style="color: var(--gold); text-decoration: none;">christallensj@gmail.com</a></p>
+            <p>📞 Numéro : +509 3520-1758</p>
+        </div>
+        <div style="text-align: center;"><button class="btn-action" onclick="showPage('hub')">Retour au HUB</button></div>
+    </section>
+
+    <section id="menu-dieux"><div class="card"><h1>Les Dieux Olympiens</h1><div class="grid-menu"><button onclick="showPage('zeus')">Zeus</button><button onclick="showPage('hera')">Héra</button><button onclick="showPage('poseidon')">Poséidon</button><button onclick="showPage('athena')">Athéna</button><button onclick="showPage('ares')">Arès</button><button onclick="showPage('apollon')">Apollon</button><button onclick="showPage('artemis')">Artémis</button><button onclick="showPage('hermes')">Hermès</button><button onclick="showPage('hades')">Hadès</button><button onclick="showPage('aphrodite')">Aphrodite</button></div><button class="btn-action" onclick="showPage('hub')">Retour</button></div></section>
+    <section id="menu-titans"><div class="card"><h1>Les Anciens Titans</h1><div class="grid-menu"><button onclick="showPage('cronos')">Cronos</button><button onclick="showPage('rhea')">Rhéa</button><button onclick="showPage('atlas')">Atlas</button><button onclick="showPage('promethee')">Prométhée</button><button onclick="showPage('oceanos')">Océanos</button><button onclick="showPage('hyperion')">Hypérion</button></div><button class="btn-action" onclick="showPage('hub')">Retour</button></div></section>
+    <section id="menu-lieux"><div class="card"><h1>Lieux Mythiques</h1><div class="grid-menu"><button onclick="showPage('olympe')">L'Olympe</button><button onclick="showPage('enfers')">Les Enfers</button><button onclick="showPage('atlantide')">L'Atlantide</button><button onclick="showPage('labyrinthe')">Le Labyrinthe</button><button onclick="showPage('tartare')">Le Tartare</button></div><button class="btn-action" onclick="showPage('hub')">Retour</button></div></section>
+    <section id="menu-monstres"><div class="card"><h1>Créatures & Monstres</h1><div class="grid-menu"><button onclick="showPage('cerbere')">Cerbère</button><button onclick="showPage('meduse')">Méduse</button><button onclick="showPage('minotaure')">Le Minotaure</button><button onclick="showPage('hydre')">L'Hydre</button><button onclick="showPage('sphinx')">Le Sphinx</button><button onclick="showPage('chimere')">La Chimère</button><button onclick="showPage('polypheme')">Polyphème</button></div><button class="btn-action" onclick="showPage('hub')">Retour</button></div></section>
+    <section id="menu-heros"><div class="card"><h1>Héros Légendaires</h1><div class="grid-menu"><button onclick="showPage('hercule')">Hercule</button><button onclick="showPage('achille')">Achille</button><button onclick="showPage('persee')">Persée</button><button onclick="showPage('thesee')">Thésée</button><button onclick="showPage('ulysse')">Ulysse</button></div><button class="btn-action" onclick="showPage('hub')">Retour</button></div></section>
+
+    <footer>Projet Scolaire - Encyclopédie de la Mythologie Grecque</footer>
+
+ <script>
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let currentUserName = ""; // C'est cette variable qui gère tout l'état
+
+    function toggleMusic() {
+        if (music.paused) {
+            music.play();
+            musicBtn.innerText = "COUPER LA MUSIQUE";
+            musicBtn.style.background = "#8B0000";
+            musicBtn.style.color = "white";
+        } else {
+            music.pause();
+            musicBtn.innerText = "LANCER LA MUSIQUE";
+            musicBtn.style.background = "var(--gold)";
+            musicBtn.style.color = "black";
+        }
+    }
+
+    function showPage(id) {  
+        const publicPages = ['accueil', 'connexion', 'inscription'];
+        
+        // Bloquer l'accès si pas connecté
+        if (!publicPages.includes(id) && currentUserName === "") {
+            alert("Veuillez d'abord vous connecter pour accéder aux archives sacrées.");
+            showPage('connexion');
+            return;
+        }
+
+        const sections = document.querySelectorAll('section');  
+        sections.forEach(s => s.style.display = 'none');  
+        
+        const target = document.getElementById(id);  
+        if(!target) return;  
+          
+        target.style.display = (id === 'accueil' || id === 'inscription' || id === 'connexion' || id.includes('menu') || id === 'hub') ? 'flex' : 'block';  
+        
+        // Cacher la nav sur les pages de garde
+        if(publicPages.includes(id)) {  
+            document.getElementById('main-nav').style.display = "none";  
+        } else {  
+            document.getElementById('main-nav').style.display = "flex";  
+        }  
+        window.scrollTo(0,0);  
+    }  
+
+    // CETTE FONCTION VALIDE L'ENTRÉE (CONNEXION OU INSCRIPTION)
+    function unlockSite(mode) {   
+        // On récupère la valeur selon le mode
+        let userField = (mode === 'login') ? document.getElementById('email_login').value : document.getElementById('username').value;
+        
+        if(!userField || userField.trim() === "") {
+            alert("Veuillez remplir les informations.");
+            return;
+        }
+
+        // 1. On définit l'utilisateur (ça débloque tout)
+        currentUserName = userField.split('@')[0]; 
+        
+        // 2. On met à jour l'affichage
+        document.getElementById('welcome-msg').innerText = "Salutations, " + currentUserName + " !";
+        document.getElementById('auth-status').innerHTML = "🚪 Déconnexion"; 
+        
+        // 3. On envoie vers le HUB
+        showPage('hub');   
+    }  
+
+function handleAuthAction() {
+    // Si currentUserName est VIDE, ça veut dire qu'on n'est PAS connecté
+    if (currentUserName === "") {
+        // DONC : on envoie à l'inscription SANS demander de confirmation
+        showPage('inscription'); 
+    } 
+    // Sinon, ça veut dire qu'on EST connecté
+    else {
+        // DONC : on propose la déconnexion
+        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
+            currentUserName = ""; 
+            document.getElementById('auth-status').innerHTML = "👤 S'inscrire";
+            showPage('connexion'); 
+        }
+    }
+
+
+}
+
+
+    window.onload = function() { 
+        showPage('accueil'); 
+    };
+</script>
+
+</body>
+</html>
